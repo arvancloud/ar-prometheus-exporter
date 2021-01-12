@@ -1,0 +1,27 @@
+{
+  "name": "ar-prometheus-exporter",
+  "version": "0.1.0",
+  "description": "Arvan CDN Prometheus Exporter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SadeghHayeri/ar-prometheus-exporter.git"
+  },
+  "keywords": [
+    "Arvan",
+    "CDN",
+    "prometheus",
+    "exporter",
+    "monitoring",
+    "grafana"
+  ],
+  "author": "Sadegh Hayeri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SadeghHayeri/ar-prometheus-exporter/issues"
+  },
+  "homepage": "https://github.com/SadeghHayeri/ar-prometheus-exporter#readme"
+}
