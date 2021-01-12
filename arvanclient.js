@@ -12,9 +12,6 @@ class ArvanClient {
     });
   }
 
-  async getDomains() {
-  }
-
   async getTrafficReport(domain) {
     const req = await this.client.get(`/domains/${domain}/reports/traffics?period=${METRICS_PERIOD}`)
     const latestTrafficReport = req.data.data.charts.traffics.series
