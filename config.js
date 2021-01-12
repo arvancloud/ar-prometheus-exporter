@@ -7,8 +7,8 @@ const CONFIG = {
   MODE: env.MODE || 'PASSIVE',
   PORT: env.PORT || 9097,
   API_KEY: env.API_KEY,
-  DOMAINS: env.DOMAINS.split(','),
-  UPDATE_INTERVAL: env.UPDATE_INTERVAL || 60,
+  DOMAINS: (typeof(env.DOMAINS) === 'string') ? [env.DOMAINS] : env.DOMAINS,
+  UPDATE_INTERVAL: env.UPDATE_INTERVAL || 30000,
   BASE_URL: env.BASE_URL || 'https://napi.arvancloud.com/cdn/4.0/',
   METRICS_PERIOD: env.METRICS_PERIOD || '3h',
 }
