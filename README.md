@@ -21,15 +21,15 @@ The exporter exposes the following metrics, all returned per PoP:
 
 | Name                                 | Description                                               |  Type |
 |:-------------------------------------|:----------------------------------------------------------|:-----:|
-| `arvancloud_cdn_update_metrics_error`   | number of exporter errors | counter |
-| `arvancloud_cdn_requests`     | number of requests  | gauge |
-| `arvancloud_cdn_traffic` | traffic served by ArvanCloud                       | gauge |
-| `arvancloud_cdn_visitors`        | number of unique visitors | gauge |
-| `arvancloud_cdn_high_request_ips`        | high request ips                                     | gauge |
-| `arvancloud_cdn_requests_by_country`    | number of request by country                                 | gauge |
-| `arvancloud_cdn_traffic_by_country`      | traffic by country                      | gauge |
-| `arvancloud_cdn_response_time`            | response time                     | gauge |
-| `arvancloud_cdn_requests_by_status`               | number of request by HTTP status code                   | gauge |
+| `update_metrics_error`   | number of exporter errors | counter |
+| `requests`     | number of requests  | gauge |
+| `traffic` | traffic served by ArvanCloud                       | gauge |
+| `visitors`        | number of unique visitors | gauge |
+| `high_request_ips`        | high request ips                                     | gauge |
+| `requests_by_country`    | number of request by country                                 | gauge |
+| `traffic_by_country`      | traffic by country                      | gauge |
+| `response_time`            | response time                     | gauge |
+| `requests_by_status`               | number of request by HTTP status code                   | gauge |
 
 
 ### Config
