@@ -1,6 +1,51 @@
 # ar-prometheus-exporter
 ArvanCloud CDN Analytics Prometheus Exporter
 
+A very simple Prometheus exporter that exposes metrics from ArvanCloud colocations API as described in the [API documentation](https://www.arvancloud.com/docs/api/cdn/4.0).
+
+ 
+### Try it
+
+Running the container:
+```
+docker run \
+ -d \
+ -p 9097:9097 \
+ -e DOMAINS=example.com,example.ir \
+ -e API_KEY=TOKEN_HERE \
+ sadeghhayeri/ar-exporter:v0.1.0
+```
+
+### Metrics
+The exporter exposes the following metrics, all returned per PoP:
+
+| Name                                 | Description                                               |  Type |
+|:-------------------------------------|:----------------------------------------------------------|:-----:|
+| `update_metrics_error`   | number of exporter errors | counter |
+| `requests`     | number of requests  | gauge |
+| `traffic` | traffic served by ArvanCloud                       | gauge |
+| `visitors`        | number of unique visitors | gauge |
+| `high_request_ips`        | high request ips                                     | gauge |
+| `requests_by_country`    | number of request by country                                 | gauge |
+| `traffic_by_country`      | traffic by country                      | gauge |
+| `response_time`            | response time                     | gauge |
+| `requests_by_status`               | number of request by HTTP status code                   | gauge |
+
+
+### Config
+
+| Name                                 | Description                                               |  Type | Default
+|:-------------------------------------|:----------------------------------------------------------|:-----:|:--------:|
+| `MODE` | metrics collector mode | enum(ACTIVE, PASSIVE) | PASSIVE
+| `PORT` | listening port  | number | 9097
+| `API_KEY` | your Arvan API-Key | string | -
+| `DOMAINS` | list of domain wants to scrape metrics | string or comma separate list | -
+| `UPDATE_INTERVAL` | update metrics interval (only valid in passive mode) | number(milliseconds) | 30000
+| `BASE_URL` | Arvan base URL | string | https://napi.arvancloud.com/cdn/4.0
+| `METRICS_PERIOD` | Arvan report period | enum(1h, 3h, 6h, 12h, 24h, 7d, 30d) | 3h
+
+---
+
 # Brief
 A Prometheus exporter that exposes metrics from ArvanCloud's API as described in the API documentation.
 
