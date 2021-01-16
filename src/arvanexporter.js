@@ -11,55 +11,55 @@ class CDNExporter {
     this.arvanClient = new ArvanClient(apiKey)
 
     this.updateMetricsError = new Prometheus.Counter({
-      name: 'update_metrics_error',
+      name: 'arvancloud_cdn_update_metrics_error',
       help: 'number of errors',
       labelNames: ['domain'],
     })
 
     this.requests = new Prometheus.Gauge({
-      name: 'requests',
+      name: 'arvancloud_cdn_requests',
       help: 'request counts',
       labelNames: ['domain', 'cache_type'],
     })
 
     this.traffic = new Prometheus.Gauge({
-      name: 'traffic',
+      name: 'arvancloud_cdn_traffic',
       help: 'traffic served',
       labelNames: ['domain', 'cache_type'],
     })
 
     this.visitors = new Prometheus.Gauge({
-      name: 'visitors',
+      name: 'arvancloud_cdn_visitors',
       help: 'unique visitors',
       labelNames: ['domain'],
     })
 
     this.highRequestIps = new Prometheus.Gauge({
-      name: 'high_request_ips',
+      name: 'arvancloud_cdn_high_request_ips',
       help: 'top ips with highest requests',
       labelNames: ['domain', 'ip'],
     })
 
     this.requestsByCountry = new Prometheus.Gauge({
-      name: 'requests_by_country',
+      name: 'arvancloud_cdn_requests_by_country',
       help: 'request counter by country',
       labelNames: ['domain', 'country_code', 'country_name'],
     })
 
     this.trafficByCountry = new Prometheus.Gauge({
-      name: 'traffic_by_country',
+      name: 'arvancloud_cdn_traffic_by_country',
       help: 'request counter by country',
       labelNames: ['domain', 'country_code', 'country_name'],
     })
 
     this.responseTime = new Prometheus.Gauge({
-      name: 'response_time',
+      name: 'arvancloud_cdn_response_time',
       help: 'response time',
       labelNames: ['domain'],
     })
 
     this.requestByStatus = new Prometheus.Gauge({
-      name: 'requests_by_status',
+      name: 'arvancloud_cdn_requests_by_status',
       help: 'requests by status code',
       labelNames: ['domain', 'status'],
     })
@@ -94,7 +94,7 @@ class CDNExporter {
 
         this.visitors.labels(domain).set(visitorsReport.visitors)
 
-        Prometheus.register.removeSingleMetric('high_request_ips')
+        Prometheus.register.removeSingleMetric('arvancloud_cdn_high_request_ips')
         highRequestIpReport.forEach(({ip, requestCount}) => {
           this.highRequestIps.labels(domain, ip).set(requestCount)
         })
