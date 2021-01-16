@@ -1,6 +1,6 @@
 const ArvanClient = require('./arvanclient')
 const Prometheus = require('prom-client')
-const { UPDATE_INTERVAL } = require('./config')
+const { UPDATE_INTERVAL, METRICS_PREFIX } = require('./config')
 const Promise = require('bluebird')
 const logger = require('pino')()
 
@@ -11,55 +11,55 @@ class CDNExporter {
     this.arvanClient = new ArvanClient(apiKey)
 
     this.updateMetricsError = new Prometheus.Counter({
-      name: 'arvancloud_cdn_update_metrics_error',
+      name: `${METRICS_PREFIX}update_metrics_error`,
       help: 'number of errors',
       labelNames: ['domain'],
     })
 
     this.requests = new Prometheus.Gauge({
-      name: 'arvancloud_cdn_requests',
+      name: `${METRICS_PREFIX}requests`,
       help: 'request counts',
       labelNames: ['domain', 'cache_type'],
     })
 
     this.traffic = new Prometheus.Gauge({
-      name: 'arvancloud_cdn_traffic',
+      name: `${METRICS_PREFIX}traffic`,
       help: 'traffic served',
       labelNames: ['domain', 'cache_type'],
     })
 
     this.visitors = new Prometheus.Gauge({
-      name: 'arvancloud_cdn_visitors',
+      name: `${METRICS_PREFIX}visitors`,
       help: 'unique visitors',
       labelNames: ['domain'],
     })
 
     this.highRequestIps = new Prometheus.Gauge({
-      name: 'arvancloud_cdn_high_request_ips',
+      name: `${METRICS_PREFIX}high_request_ips`,
       help: 'top ips with highest requests',
       labelNames: ['domain', 'ip'],
     })
 
     this.requestsByCountry = new Prometheus.Gauge({
-      name: 'arvancloud_cdn_requests_by_country',
+      name: `${METRICS_PREFIX}requests_by_country`,
       help: 'request counter by country',
       labelNames: ['domain', 'country_code', 'country_name'],
     })
 
     this.trafficByCountry = new Prometheus.Gauge({
-      name: 'arvancloud_cdn_traffic_by_country',
+      name: `${METRICS_PREFIX}traffic_by_country`,
       help: 'request counter by country',
       labelNames: ['domain', 'country_code', 'country_name'],
     })
 
     this.responseTime = new Prometheus.Gauge({
-      name: 'arvancloud_cdn_response_time',
+      name: `${METRICS_PREFIX}response_time`,
       help: 'response time',
       labelNames: ['domain'],
     })
 
     this.requestByStatus = new Prometheus.Gauge({
-      name: 'arvancloud_cdn_requests_by_status',
+      name: `${METRICS_PREFIX}requests_by_status`,
       help: 'requests by status code',
       labelNames: ['domain', 'status'],
     })
@@ -94,7 +94,7 @@ class CDNExporter {
 
         this.visitors.labels(domain).set(visitorsReport.visitors)
 
-        Prometheus.register.removeSingleMetric('arvancloud_cdn_high_request_ips')
+        Prometheus.register.removeSingleMetric(`${METRICS_PREFIX}high_request_ips`)
         highRequestIpReport.forEach(({ip, requestCount}) => {
           this.highRequestIps.labels(domain, ip).set(requestCount)
         })
