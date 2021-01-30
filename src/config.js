@@ -5,7 +5,7 @@ env = dotenvParseVariables(process.env);
 
 const CONFIG = {
   MODE: env.MODE || 'PASSIVE',
-  PORT: env.PORT || 9097,
+  PORT: env.PORT || 9786,
   API_KEY: env.API_KEY,
   DOMAINS: (typeof(env.DOMAINS) === 'string') ? [env.DOMAINS] : env.DOMAINS,
   UPDATE_INTERVAL: env.UPDATE_INTERVAL || 30000,

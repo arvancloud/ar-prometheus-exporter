@@ -12,7 +12,7 @@ Running the container:
 git clone git@github.com:arvancloud/ar-prometheus-exporter.git && cd ar-prometheus-exporter
 docker build -t ar-prometheus-exporter .
 docker run -d \
- -p 9097:9097 \
+ -p 9786:9786 \
  -e DOMAINS=example.com,example.ir \
  -e API_KEY=TOKEN_HERE \
  ar-prometheus-exporter
@@ -39,7 +39,7 @@ The exporter exposes the following metrics, all returned per PoP:
 | Name                                 | Description                                               |  Type | Default
 |:-------------------------------------|:----------------------------------------------------------|:-----:|:--------:|
 | `MODE` | metrics collector mode | enum(ACTIVE, PASSIVE) | PASSIVE
-| `PORT` | listening port  | number | 9097
+| `PORT` | listening port  | number | 9786
 | `API_KEY` | your Arvan API-Key | string | -
 | `DOMAINS` | list of domain wants to scrape metrics | string or comma separate list | -
 | `UPDATE_INTERVAL` | update metrics interval (only valid in passive mode) | number(milliseconds) | 30000
