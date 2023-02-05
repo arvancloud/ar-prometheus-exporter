@@ -1,0 +1,14 @@
+version: '3.2'
+service:
+  ar-exporter:
+    build:
+     context: .
+     dockerfile: ./dockerfile
+     targer: app
+    container_name: ar-exporter
+    ports:
+    - 9786:9786
+    environment:
+     DOMAINS: example.com 
+     API_KEY: arvan-api-key 
+    network_mode: "bridge"  
