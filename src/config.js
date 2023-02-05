@@ -9,7 +9,7 @@ const CONFIG = {
   API_KEY: env.API_KEY,
   DOMAINS: (typeof(env.DOMAINS) === 'string') ? [env.DOMAINS] : env.DOMAINS,
   UPDATE_INTERVAL: env.UPDATE_INTERVAL || 30000,
-  BASE_URL: env.BASE_URL || 'https://napi.arvancloud.com/cdn/4.0/',
+  BASE_URL: env.BASE_URL || 'https://napi.arvancloud.ir/cdn/4.0/',
   METRICS_PERIOD: env.METRICS_PERIOD || '3h',
   METRICS_PREFIX: env.METRICS_PREFIX || 'arvancloud_cdn_',
 }
