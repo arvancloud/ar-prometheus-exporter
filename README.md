@@ -1,18 +1,14 @@
 # ar-prometheus-exporter
 
-ArvanCloud CDN Analytics Prometheus Exporter
+![logo](.github/logo.svg)
 
-A very simple Prometheus exporter that exposes metrics from ArvanCloud colocations API as described in the [API documentation](https://www.arvancloud.com/docs/api/cdn/4.0).
+A very simple Prometheus exporter that exposes metrics from ArvanCloud API as described in the [documentation](https://www.arvancloud.ir/api/cdn/4.0).
 
-# Brief
+## How-to
 
-A Prometheus exporter that exposes metrics from ArvanCloud's API as described in the API documentation.
+You can run the exporter using Docker:
 
-### Try it
-
-Running the container:
-
-```
+```bash
 git clone git@github.com:arvancloud/ar-prometheus-exporter.git && cd ar-prometheus-exporter
 docker build -t ar-prometheus-exporter .
 docker run -d \
@@ -47,11 +43,11 @@ The exporter exposes the following metrics, all returned per PoP:
 | `API_KEY`         | your Arvan API-Key                                   |               string                |                 -                  |
 | `DOMAINS`         | list of domain wants to scrape metrics               |    string or comma separate list    |                 -                  |
 | `UPDATE_INTERVAL` | update metrics interval (only valid in passive mode) |        number(milliseconds)         |               30000                |
-| `BASE_URL`        | Arvan base URL                                       |               string                | https://napi.arvancloud.ir/cdn/4.0 |
+| `BASE_URL`        | Arvan base URL                                       |               string                | <https://napi.arvancloud.ir/cdn/4.0> |
 | `METRICS_PERIOD`  | Arvan report period                                  | enum(1h, 3h, 6h, 12h, 24h, 7d, 30d) |                 3h                 |
 | `METRICS_PREFIX`  | exported metrics prefix                              |               string                |         `arvancloud_cdn_`          |
 
-### 👨🏻‍💻 Contributors:
+### 👨🏻‍💻 Contributors
 
 - SadeghHayeri [![https://github.com/sadeghhayeri](https://img.shields.io/github/followers/sadeghhayeri?color=red&label=Follow&logo=github&style=flat-square)](https://github.com/sadeghhayeri)
 - Yazdan [![https://github.com/yzdann](https://img.shields.io/github/followers/yzdann?color=red&label=Follow&logo=github&style=flat-square)](https://github.com/yzdann)
