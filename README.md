@@ -1,21 +1,19 @@
-# ar-prometheus-exporter
+# CDN Prometheus exporter
 
 ![logo](.github/logo.svg)
 
-A very simple Prometheus exporter that exposes metrics from ArvanCloud API as described in the [documentation](https://www.arvancloud.ir/api/cdn/4.0).
+A very simple Prometheus exporter that exposes metrics from ArvanCloud CDN API as described in the [documentation](https://www.arvancloud.ir/api/cdn/4.0).
 
 ## How-to
 
 You can run the exporter using Docker:
 
 ```bash
-git clone git@github.com:arvancloud/ar-prometheus-exporter.git && cd ar-prometheus-exporter
-docker build -t ar-prometheus-exporter .
 docker run -d \
  -p 9786:9786 \
  -e DOMAINS=example.com,example.ir \
  -e API_KEY=TOKEN_HERE \
- ar-prometheus-exporter
+ r1cloud/cdn-exporter
 ```
 
 ### Metrics
@@ -46,8 +44,3 @@ The exporter exposes the following metrics, all returned per PoP:
 | `BASE_URL`        | Arvan base URL                                       |               string                | <https://napi.arvancloud.ir/cdn/4.0> |
 | `METRICS_PERIOD`  | Arvan report period                                  | enum(1h, 3h, 6h, 12h, 24h, 7d, 30d) |                 3h                 |
 | `METRICS_PREFIX`  | exported metrics prefix                              |               string                |         `arvancloud_cdn_`          |
-
-### 👨🏻‍💻 Contributors
-
-- SadeghHayeri [![https://github.com/sadeghhayeri](https://img.shields.io/github/followers/sadeghhayeri?color=red&label=Follow&logo=github&style=flat-square)](https://github.com/sadeghhayeri)
-- Yazdan [![https://github.com/yzdann](https://img.shields.io/github/followers/yzdann?color=red&label=Follow&logo=github&style=flat-square)](https://github.com/yzdann)
