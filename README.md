@@ -1,5 +1,7 @@
 # CDN Prometheus exporter
 
+[![Release](https://github.com/arvancloud/ar-prometheus-exporter/actions/workflows/release.yml/badge.svg)](https://github.com/arvancloud/ar-prometheus-exporter/actions/workflows/release.yml)
+
 ![logo](.github/logo.svg)
 
 A very simple Prometheus exporter that exposes metrics from ArvanCloud CDN API as described in the [documentation](https://www.arvancloud.ir/api/cdn/4.0).

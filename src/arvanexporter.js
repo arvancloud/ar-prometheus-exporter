@@ -95,11 +95,11 @@ class CDNExporter {
         this.visitors.labels(domain).set(visitorsReport.visitors)
 
         Prometheus.register.removeSingleMetric(`${METRICS_PREFIX}high_request_ips`)
-        highRequestIpReport.forEach(({ip, requestCount}) => {
+        highRequestIpReport.forEach(({ ip, requestCount }) => {
           this.highRequestIps.labels(domain, ip).set(requestCount)
         })
 
-        geoRequestReport.forEach(({code, name, traffics, requests}) => {
+        geoRequestReport.forEach(({ code, name, traffics, requests }) => {
           this.requestsByCountry.labels(domain, code, name).set(requests)
           this.trafficByCountry.labels(domain, code, name).set(traffics)
         })
