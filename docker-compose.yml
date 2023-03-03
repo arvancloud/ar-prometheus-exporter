@@ -1,14 +1,10 @@
-version: '3.2'
-service:
-  ar-exporter:
-    build:
-     context: .
-     dockerfile: ./dockerfile
-     targer: app
-    container_name: ar-exporter
+version: "3.9"
+
+services:
+  cdn-exporter:
+    image: r1cloud/cdn-exporter
     ports:
-    - 9786:9786
+      - 9786:9786
     environment:
-     DOMAINS: example.com 
-     API_KEY: arvan-api-key 
-    network_mode: "bridge"  
+      DOMAINS: example.com
+      API_KEY: arvan-api-key
