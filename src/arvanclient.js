@@ -46,7 +46,7 @@ class ArvanClient {
 
   async getHighRequestIps(domain) {
     const req = await this.client.get(`/domains/${domain}/reports/high-request-ips?period=${METRICS_PERIOD}`)
-    return req.data.data.map(info => ({ip: info.ip, requestCount: info.request_count}))
+    return req.data.data.map(info => ({ ip: info.ip, requestCount: info.request_count }))
   }
 
   async getGeoTrafficReport(domain) {
