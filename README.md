@@ -1,6 +1,6 @@
 # CDN Prometheus exporter
 
-[![Release](https://github.com/arvancloud/ar-prometheus-exporter/actions/workflows/release.yml/badge.svg)](https://github.com/arvancloud/ar-prometheus-exporter/actions/workflows/release.yml)
+[![Release](https://github.com/arvancloud/ar-prometheus-exporter/actions/workflows/release.yml/badge.svg)](https://github.com/arvancloud/ar-prometheus-exporter/actions/workflows/release.yml) ![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/r1cloud/cdn-exporter?sort=semver)
 
 ![logo](.github/logo.svg)
 
