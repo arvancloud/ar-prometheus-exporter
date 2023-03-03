@@ -1,9 +1,9 @@
-FROM node:14-alpine AS BUILDER
+FROM --platform=$BUILDPLATFORM node:14-alpine AS BUILDER
 WORKDIR /app
 COPY ./package*.json ./
 RUN npm install
 
-FROM node:14-alpine AS APP
+FROM --platform=$BUILDPLATFORM node:14-alpine AS APP
 
 ARG APP_VERSION="undefined@docker"
 
