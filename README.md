@@ -30,19 +30,20 @@ docker run -d \
 | `BASE_URL`        | Arvan base URL                                       |               string                | <https://napi.arvancloud.ir/cdn/4.0> |
 | `METRICS_PERIOD`  | Arvan report period                                  | enum(1h, 3h, 6h, 12h, 24h, 7d, 30d) |                 3h                 |
 | `METRICS_PREFIX`  | exported metrics prefix                              |               string                |         `arvancloud_cdn_`          |
+| `METRICS` | list of metrics wants to scrape ( Select from ID fields ) | string or comma separate list | `all` |
 
 ### Metrics
 
 The exporter exposes the following metrics, all returned per PoP:
 
-| Name                                  | Description                           |  Type   |
-| :------------------------------------ | :------------------------------------ | :-----: |
-| `arvancloud_cdn_update_metrics_error` | number of exporter errors             | counter |
-| `arvancloud_cdn_requests`             | number of requests                    |  gauge  |
-| `arvancloud_cdn_traffic`              | traffic served by ArvanCloud          |  gauge  |
-| `arvancloud_cdn_visitors`             | number of unique visitors             |  gauge  |
-| `arvancloud_cdn_high_request_ips`     | high request ips                      |  gauge  |
-| `arvancloud_cdn_requests_by_country`  | number of request by country          |  gauge  |
-| `arvancloud_cdn_traffic_by_country`   | traffic by country                    |  gauge  |
-| `arvancloud_cdn_response_time`        | response time                         |  gauge  |
-| `arvancloud_cdn_requests_by_status`   | number of request by HTTP status code |  gauge  |
+| Name                                  | ID | Description                           |  Type   |
+| :------------------------------------ | :- | :------------------------------------ | :-----: |
+| `arvancloud_cdn_update_metrics_error` |  - |number of exporter errors             | counter |
+| `arvancloud_cdn_requests`             | `traffic` | number of requests                    |  gauge  |
+| `arvancloud_cdn_traffic`              | `traffic` | traffic served by ArvanCloud          |  gauge  |
+| `arvancloud_cdn_visitors`             | `visitors` | number of unique visitors             |  gauge  |
+| `arvancloud_cdn_high_request_ips`     | `high-request-ips` | high request ips                      |  gauge  |
+| `arvancloud_cdn_requests_by_country`  | `geo` | number of request by country          |  gauge  |
+| `arvancloud_cdn_traffic_by_country`   | `geo` | traffic by country                    |  gauge  |
+| `arvancloud_cdn_response_time`        | `response-time` | response time                         |  gauge  |
+| `arvancloud_cdn_requests_by_status`   | `status-code` | number of request by HTTP status code |  gauge  |
