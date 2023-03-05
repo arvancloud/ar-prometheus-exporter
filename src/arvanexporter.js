@@ -1,6 +1,6 @@
 const ArvanClient = require('./arvanclient')
 const Prometheus = require('prom-client')
-const { UPDATE_INTERVAL, METRICS_PREFIX } = require('./config')
+const { UPDATE_INTERVAL, METRICS_PREFIX, METRICS } = require('./config')
 const Promise = require('bluebird')
 const logger = require('pino')()
 
@@ -80,35 +80,47 @@ class CDNExporter {
   async updateMetrics() {
     await Promise.map(this.domains, async (domain) => {
       try {
-        const trafficReport = await this.arvanClient.getTrafficReport(domain)
-        const visitorsReport = await this.arvanClient.getUniqueVisitorsReport(domain)
-        const highRequestIpReport = await this.arvanClient.getHighRequestIps(domain)
-        const geoRequestReport = await this.arvanClient.getGeoTrafficReport(domain)
-        const responseTimeReport = await this.arvanClient.getResponseTimeReport(domain)
-        const statusCodeReport = await this.arvanClient.getStatusCodeReport(domain)
+        console.log(METRICS)
+        if (METRICS.includes('traffic') || METRICS.includes('all')) {
+          const trafficReport = await this.arvanClient.getTrafficReport(domain)
+          this.requests.labels(domain, 'MISS').set(trafficReport.requests.total - trafficReport.requests.saved)
+          this.requests.labels(domain, 'HIT').set(trafficReport.requests.saved)
+          this.traffic.labels(domain, 'MISS').set(trafficReport.traffic.total - trafficReport.traffic.saved)
+          this.traffic.labels(domain, 'HIT').set(trafficReport.traffic.saved)
+        }
 
-        this.requests.labels(domain, 'MISS').set(trafficReport.requests.total - trafficReport.requests.saved)
-        this.requests.labels(domain, 'HIT').set(trafficReport.requests.saved)
-        this.traffic.labels(domain, 'MISS').set(trafficReport.traffic.total - trafficReport.traffic.saved)
-        this.traffic.labels(domain, 'HIT').set(trafficReport.traffic.saved)
+        if (METRICS.includes('visitors') || METRICS.includes('all')) {
+          const visitorsReport = await this.arvanClient.getUniqueVisitorsReport(domain)
+          this.visitors.labels(domain).set(visitorsReport.visitors)
+        }
 
-        this.visitors.labels(domain).set(visitorsReport.visitors)
+        if (METRICS.includes('high-request-ips') || METRICS.includes('all')) {
+          const highRequestIpReport = await this.arvanClient.getHighRequestIps(domain)
+          Prometheus.register.removeSingleMetric(`${METRICS_PREFIX}high_request_ips`)
+          highRequestIpReport.forEach(({ ip, requestCount }) => {
+            this.highRequestIps.labels(domain, ip).set(requestCount)
+          })
+        }
 
-        Prometheus.register.removeSingleMetric(`${METRICS_PREFIX}high_request_ips`)
-        highRequestIpReport.forEach(({ ip, requestCount }) => {
-          this.highRequestIps.labels(domain, ip).set(requestCount)
-        })
+        if (METRICS.includes('geo') || METRICS.includes('all')) {
+          const geoRequestReport = await this.arvanClient.getGeoTrafficReport(domain)
+          geoRequestReport.forEach(({ code, name, traffics, requests }) => {
+            this.requestsByCountry.labels(domain, code, name).set(requests)
+            this.trafficByCountry.labels(domain, code, name).set(traffics)
+          })
+        }
 
-        geoRequestReport.forEach(({ code, name, traffics, requests }) => {
-          this.requestsByCountry.labels(domain, code, name).set(requests)
-          this.trafficByCountry.labels(domain, code, name).set(traffics)
-        })
+        if (METRICS.includes('response-time') || METRICS.includes('all')) {
+          const responseTimeReport = await this.arvanClient.getResponseTimeReport(domain)
+          this.responseTime.labels(domain).set(responseTimeReport.responseTime)
+        }
 
-        this.responseTime.labels(domain).set(responseTimeReport.responseTime)
-
-        Object.keys(statusCodeReport).forEach(key => {
-          this.requestByStatus.labels(domain, key).set(statusCodeReport[key])
-        })
+        if (METRICS.includes('status-code') || METRICS.includes('all')) {
+          const statusCodeReport = await this.arvanClient.getStatusCodeReport(domain)
+          Object.keys(statusCodeReport).forEach(key => {
+            this.requestByStatus.labels(domain, key).set(statusCodeReport[key])
+          })
+        }
       } catch (e) {
         logger.error(`Error on updating ${domain} metrics.`)
         this.updateMetricsError.labels(domain).inc()

@@ -14,6 +14,7 @@ const CONFIG = {
   BASE_URL: env.BASE_URL || 'https://napi.arvancloud.ir/cdn/4.0/',
   METRICS_PERIOD: env.METRICS_PERIOD || '3h',
   METRICS_PREFIX: env.METRICS_PREFIX || 'arvancloud_cdn_',
+  METRICS: Array.isArray(env.METRICS) ? env.METRICS : (typeof env.METRICS === 'string' ? [env.METRICS] : ['all']),
 }
 
 module.exports = CONFIG;
