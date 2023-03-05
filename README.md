@@ -47,3 +47,6 @@ The exporter exposes the following metrics, all returned per PoP:
 | `arvancloud_cdn_traffic_by_country`   | `geo` | traffic by country                    |  gauge  |
 | `arvancloud_cdn_response_time`        | `response-time` | response time                         |  gauge  |
 | `arvancloud_cdn_requests_by_status`   | `status-code` | number of request by HTTP status code |  gauge  |
+
+> **Note**: The `high-request-ips` metric is available in **Professional** plan and higher.
+
